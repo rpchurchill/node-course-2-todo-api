@@ -44,12 +44,12 @@ app.get('/todos/:id', (req, res) => {
       console.log('todo Id not found');
       return res.status(400).send();
     }
-    console.log('Todo By Id', todo);
+    //console.log('Todo By Id', todo);
     res.send(todo);
-  }); //.catch((e) => {
-  //  console.log('Does this ever happen?',e);
-  //  res.status(400).send();
-  //});
+  }).catch((e) => {
+    console.log('Does this ever happen?',e);
+    res.status(400).send();
+  });
   
 });
 

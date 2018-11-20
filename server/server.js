@@ -36,15 +36,15 @@ app.get('/todos/:id', (req, res) => {
   var todoId = req.params.id;
   
   if (!ObjectID.isValid(todoId)) {
-    console.log('todo ID not valid');
+    console.log('todo Id not valid');
     return res.status(404).send();
   }
 
   Todo.findById(todoId).then((todo) => {
     if (!todo) {
       console.log('todo Id not found');
-      return res.status(400).send();
-    }
+      return res.status(404).send();
+    };
     //console.log('Todo By Id', todo);
     res.send(todo);
   }).catch((e) => {
@@ -53,6 +53,28 @@ app.get('/todos/:id', (req, res) => {
   });
   
 });
+
+app.delete('/todos/:id', (req, res) => {
+  var todoId = req.params.id;
+  
+  if (!ObjectID.isValid(todoId)) {
+    console.log('todo Id is not valid');
+    return res.status(404).send();
+  };
+  
+Todo.findOneAndDelete({_id: todoId}).then((todo) => {
+    if (!todo) {
+      console.log('todo Id not found');
+      return res.status(404).send();
+    };
+    res.send(todo);
+  }).catch((e) => {
+    console.log('Does this ever happen?',e);
+    res.status(400).send();
+  });
+  
+});
+
 
 app.listen(port, () => {
   console.log(`Started on port ${port}`);

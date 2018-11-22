@@ -67,7 +67,7 @@ Todo.findOneAndDelete({_id: todoId}).then((todo) => {
       console.log('todo Id not found');
       return res.status(404).send();
     };
-    res.send(todo);
+res.send({todo});
   }).catch((e) => {
     console.log('Does this ever happen?',e);
     res.status(400).send();

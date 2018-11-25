@@ -38,13 +38,13 @@ describe('POST /todos', () => {
           return done('fred ' + err);
         }
         
-      Todo.find({text}).then((todos) => {
+        Todo.find({text}).then((todos) => {
           expect(todos.length).toBe(1);
           expect(todos[0].text).toBe(text);
           done();
         }).catch((e) => done('barney ' + e));
       });
-  });
+  }).timeout(9000);
   
   it('should not create todo with invalid body data', (done) => {
     request(app)

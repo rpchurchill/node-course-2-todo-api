@@ -40,19 +40,19 @@ app.get('/todos/:id', (req, res) => {
   var todoId = req.params.id;
   
   if (!ObjectID.isValid(todoId)) {
-    console.log('todo Id not valid');
+    //console.log('todo Id not valid');
     return res.status(404).send();
   }
 
   Todo.findById(todoId).then((todo) => {
     if (!todo) {
-      console.log('todo Id not found');
+      //console.log('todo Id not found');
       return res.status(404).send();
     };
     //console.log('Todo By Id', todo);
     res.send(todo);
   }).catch((e) => {
-    console.log('Does this ever happen?',e);
+    //console.log('Does this ever happen?',e);
     res.status(400).send();
   });
   
@@ -62,18 +62,18 @@ app.delete('/todos/:id', (req, res) => {
   var todoId = req.params.id;
   
   if (!ObjectID.isValid(todoId)) {
-    console.log('todo Id is not valid');
+    //console.log('todo Id is not valid');
     return res.status(404).send();
   };
   
   Todo.findOneAndDelete({_id: todoId}).then((todo) => {
     if (!todo) {
-      console.log('todo Id not found');
+      //console.log('todo Id not found');
       return res.status(404).send();
     };
     res.send({todo});
   }).catch((e) => {
-    console.log('Does this ever happen?',e);
+    //console.log('Does this ever happen?',e);
     res.status(400).send();
   });
   
@@ -115,7 +115,7 @@ app.post('/users', (req, res) => {
   res.header('x-auth', token).send(user);
 }).catch((e) => {
     res.status(400).send(e);
-  });
+  })
 });
 
 app.get('/users/me', authenticate, (req, res) => {

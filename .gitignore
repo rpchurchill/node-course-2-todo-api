@@ -1,2 +1,4 @@
 node_modules/
 heroku url and todo id.txt
+server/config/config.json
+mongo_startup.txt
